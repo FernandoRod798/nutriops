@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# NutriOps — Fitness Coaching Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web platform for fitness coaches to manage clients, assign training programs, routines, and nutrition plans.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Frontend: coming soon
+- Backend API: coming soon
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend**
+- React 18 + TypeScript
+- Vite
+- Tailwind CSS v4
+- shadcn/ui + Radix UI
+- React Router DOM
+- Lucide React
 
-## Expanding the ESLint configuration
+**Backend**
+- Python + Flask
+- SQLAlchemy ORM
+- PostgreSQL
+- Flask-CORS
+- Gunicorn
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Architecture
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Frontend — Feature-based architecture
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+frontend/src/
+├── features/
+│   ├── clients/          # Everything related to clients
+│   │   ├── components/   # ClientList, ClientForm, ClientDetail
+│   │   ├── hooks/        # useClients
+│   │   ├── services/     # clientService, clientProgramService
+│   │   ├── types/        # Client, ClientProgram, Routine, Exercise, Meal
+│   │   └── index.ts      # Public API of this feature
+│   ├── programs/         # Everything related to programs
+│   │   ├── hooks/        # usePrograms
+│   │   ├── services/     # programService
+│   │   ├── types/        # Program
+│   │   └── index.ts
+│   └── dashboard/        # Dashboard-specific components and hooks
+├── shared/               # Shared across all features
+│   └── hooks/            # useTheme
+├── layouts/              # AppLayout, AppSidebar
+├── pages/                # Route-level components
+└── components/ui/        # shadcn/ui components
