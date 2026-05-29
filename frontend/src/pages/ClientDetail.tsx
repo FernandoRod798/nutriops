@@ -1,3 +1,15 @@
-export default function ClientDetail() {
-  return <div>Client Detail</div>
+import { ClientList } from '@/features/clients'
+
+export default function Clients() {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-semibold">Clientes</h1>
+          <p className="text-muted-foreground mt-1">Gestiona tus clientes</p>
+        </div>
+      </div>
+      <ClientList />
+    </div>
+  )
 }

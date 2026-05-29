@@ -24,7 +24,7 @@ export default function AppSidebar() {
     const location = useLocation()
 
     return (
-        <Sidebar collapsible="icon">
+        <Sidebar variant="inset" collapsible="icon">
 
             {/* Logo */}
             <SidebarHeader>

@@ -2,8 +2,8 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { Moon, Sun } from 'lucide-react'
-import AppSidebar from '@/components/AppSidebar'
-import { useTheme } from '@/hooks/useTheme'
+import AppSidebar from '@/layouts/AppSidebar'
+import { useTheme } from '@/shared/hooks/useTheme'
 
 interface AppLayoutProps {
     children: React.ReactNode

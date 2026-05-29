@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import AppLayout from '@/components/AppLayout'
+import AppLayout from '@/layouts/AppLayout'
 import Dashboard from '@/pages/Dashboard'
 import ClientDetail from '@/pages/ClientDetail'
 import Programs from '@/pages/Programs'
@@ -9,7 +9,7 @@ function App() {
     <AppLayout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/clients/:id" element={<ClientDetail />} />
+        <Route path="/clients" element={<ClientDetail />} />
         <Route path="/programs" element={<Programs />} />
       </Routes>
     </AppLayout>

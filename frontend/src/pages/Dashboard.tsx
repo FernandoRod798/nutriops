@@ -1,36 +1,67 @@
-import { useState, useEffect, useCallback } from 'react';
-import { clientService } from '@/services/clientService';
-import type { Client } from '@/types/client';
-
+import { useState, useEffect, useCallback } from 'react'
+import { useClients } from '@/features/clients'
+import { usePrograms } from '@/features/programs'
+import { Card, CardContent } from '@/components/ui/card'
+import { Users, Dumbbell, Activity } from 'lucide-react'
 
 export default function Dashboard() {
+    const { clients, loadClients } = useClients()
+    const { programs, loadPrograms } = usePrograms()
+    const [loading, setLoading] = useState<boolean>(true)
 
-    const [clientsInit, setClients] = useState<Client[]>([])
-    const [clientLoad, setClientLoad] = useState<boolean>(true)
-
-    const loadClients = useCallback(async () => {
-        const data = await clientService.getAll()
-        setClients(data)
-        setClientLoad(false)
-    }, [])
+    const loadData = useCallback(async () => {
+        await Promise.all([loadClients(), loadPrograms()])
+        setLoading(false)
+    }, [loadClients, loadPrograms])
 
     useEffect(() => {
-        loadClients()
-    }, [loadClients])
+        loadData()
+    }, [loadData])
 
-    if (clientLoad) {
-        return <p>Cargando clientes...</p>
+    if (loading) {
+        return <p className="text-muted-foreground text-sm">Cargando...</p>
     }
+
     return (
-        <div className="p-8">
-            <h1 className="text-2xl font-semibold mb-6">Clientes</h1>
-            <div className="space-y-3">
-                {clientsInit.map(client => (
-                    <div key={client.id} className="border rounded-lg p-4">
-                        <p className="font-medium">{client.name}</p>
-                        <p className="text-sm text-gray-500">{client.email}</p>
-                    </div>
-                ))}
+        <div>
+            <div className="mb-8">
+                <h1 className="text-2xl font-semibold">Dashboard</h1>
+                <p className="text-muted-foreground mt-1">Bienvenido, Coach Fernando</p>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+                <Card>
+                    <CardContent className="pt-6">
+                        <div className="flex items-center justify-between mb-3">
+                            <p className="text-sm text-muted-foreground">Total clientes</p>
+                            <Users className="size-4 text-muted-foreground" />
+                        </div>
+                        <p className="text-3xl font-semibold">{clients.length}</p>
+                        <p className="text-xs text-muted-foreground mt-1">registrados</p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardContent className="pt-6">
+                        <div className="flex items-center justify-between mb-3">
+                            <p className="text-sm text-muted-foreground">Programas</p>
+                            <Dumbbell className="size-4 text-muted-foreground" />
+                        </div>
+                        <p className="text-3xl font-semibold">{programs.length}</p>
+                        <p className="text-xs text-muted-foreground mt-1">disponibles</p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardContent className="pt-6">
+                        <div className="flex items-center justify-between mb-3">
+                            <p className="text-sm text-muted-foreground">Asignaciones activas</p>
+                            <Activity className="size-4 text-muted-foreground" />
+                        </div>
+                        <p className="text-3xl font-semibold">—</p>
+                        <p className="text-xs text-muted-foreground mt-1">en curso</p>
+                    </CardContent>
+                </Card>
             </div>
         </div>
     )
