@@ -6,21 +6,7 @@ import { Search } from "lucide-react";
 import { useClients } from "../hooks/useClients";
 import type { Client } from "../types/client";
 import { useState } from "react";
-
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-}
-
-function goalLabel(goal: string): string {
-  if (goal === "gain_muscle") return "Ganar músculo";
-  if (goal === "lose_fat") return "Perder grasa";
-  return "Mantener";
-}
+import { getInitials, goalLabel } from '@/shared/lib/utils';
 
 export default function ClientList() {
   const navigate = useNavigate();
