@@ -82,12 +82,17 @@ class ClientProgram(db.Model):
 
     def to_dict(self):
         return {
-            "id": self.id,
-            "client_id": self.client_id,
-            "program_id": self.program_id,
-            "start_date": self.start_date.isoformat(),
-            "end_date": self.end_date.isoformat() if self.end_date else None,
-            "status": self.status,
+            "id":               self.id,
+            "client_id":        self.client_id,
+            "program_id":       self.program_id,
+            # Datos del programa — accedemos a través de la relación backref="program"
+            # que definimos en el modelo Program
+            "program_name":     self.program.name,
+            "program_type":     self.program.type,
+            "duration_months":  self.program.duration_months,
+            "start_date":       self.start_date.isoformat(),
+            "end_date":         self.end_date.isoformat() if self.end_date else None,
+            "status":           self.status,
         }
     
 

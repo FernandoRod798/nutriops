@@ -1,10 +1,10 @@
-import type { ClientProgram } from "@/types/clientProgram";
+import type { ClientProgram } from "@/features/clients/types/clientProgram";
 
 const API_URL = 'http://127.0.0.1:5000';
 
 export const clientProgramService = {
 
-    async getById(clientId: number): Promise<ClientProgram> {
+    async getByClient(clientId: number): Promise<ClientProgram[]> {
         const res = await fetch(`${API_URL}/clients/${clientId}/programs`)
         return res.json();
     },

@@ -4,6 +4,7 @@ import Dashboard from '@/pages/Dashboard'
 import ClientDetail from '@/features/clients/components/ClientDetail'
 import Programs from '@/pages/Programs'
 import Clients from '@/pages/Clients'
+import ProgramDetail from '@/features/programs/components/ProgramDetail'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/clients" element={<Clients />} />
         <Route path="/clients/:id" element={<ClientDetail />} />
         <Route path="/programs" element={<Programs />} />
+        <Route path="/programs/:id" element= {<ProgramDetail/>}/>
       </Routes>
     </AppLayout>
   )

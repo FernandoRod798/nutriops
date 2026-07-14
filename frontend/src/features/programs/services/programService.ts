@@ -1,4 +1,4 @@
-import type { Program } from '@/types/program';
+import type { Program } from '@/features/programs/types/program';
 
 const API_URL = 'http://127.0.0.1:5000';
 
